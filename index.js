@@ -9,6 +9,7 @@ const combineReducers = redux.combineReducers
 const applyMiddlware = redux.applyMiddleware
 
 // npm i --save redux-logger
+// npm install redux-thunk  
 
 
 //action creator
