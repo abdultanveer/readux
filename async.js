@@ -23,7 +23,7 @@ const fetchUsersRequest = () => {
     type: FETCH_USERS_REQUEST,
   };
 };
-const fetchUsersSuccess = () => {
+const fetchUsersSuccess = users => {
   return {
     type: FETCH_USERS_SUCCESS,
     payload: users,
@@ -55,8 +55,8 @@ const fetchUsers = () => {
 
     axios
       .get("https://jsonplaceholder.typicode.com/users")
-      .then((response) => {
-        const users = response.data.map((user) => user.id);
+      .then(response => {
+        const users = response.data.map(user => user.id);
         dispatch(fetchUsersSuccess(users));
       })
       .catch((error) => {
