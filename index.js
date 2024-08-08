@@ -1,6 +1,12 @@
 const { createStore } = require("redux")
+const redux = require("redux")
 //action
 const BUY_CAKE = 'BUY_CAKE'
+const BUY_ICE = 'BUY_ICE'
+const combineReducers = redux.combineReducers
+
+
+
 
 //action creator
 function buyCake(){
@@ -10,26 +16,51 @@ function buyCake(){
     }
 }
 
+function buyIce(){
+    return {
+        type:BUY_ICE,
+        info:'buycake action'
+    }
+}
+
 const initialState = {
     numCakes: 10,
     numIcecreams:20
 }
 
-const reducer =(state = initialState,action) => {
+const cakeReducer =(state = initialState,action) => {
     switch(action.type){
         case BUY_CAKE: return {
             ...state,
             numCakes:state.numCakes -1
         }
+       
         default : return state
     }
 }
 
-const store = createStore(reducer)
+const iceReducer =(state = initialState,action) => {
+    switch(action.type){
+       
+        case BUY_ICE: return {
+            ...state,
+            numCakes:state.numIcecreams -1
+        }
+        default : return state
+    }
+}
+
+const rootReducer = combineReducers({
+    cake: cakeReducer,
+    ice:iceReducer
+})
+
+const store = createStore(rootReducer)
 
 console.log('initial state is',store.getState())
 store.dispatch(buyCake())
 store.dispatch(buyCake())
 store.dispatch(buyCake())
+store.dispatch(buyIce())
 console.log('after dispatching state is',store.getState())
 
