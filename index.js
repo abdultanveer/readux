@@ -1,11 +1,14 @@
 const { createStore } = require("redux")
 const redux = require("redux")
+const { createLogger } = require("redux-logger")
+const logger = createLogger({})
 //action
 const BUY_CAKE = 'BUY_CAKE'
 const BUY_ICE = 'BUY_ICE'
 const combineReducers = redux.combineReducers
+const applyMiddlware = redux.applyMiddleware
 
-
+// npm i --save redux-logger
 
 
 //action creator
@@ -55,12 +58,12 @@ const rootReducer = combineReducers({
     ice:iceReducer
 })
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer,applyMiddlware(logger))
 
-console.log('initial state is',store.getState())
+//console.log('initial state is',store.getState())
 store.dispatch(buyCake())
 store.dispatch(buyCake())
 store.dispatch(buyCake())
 store.dispatch(buyIce())
-console.log('after dispatching state is',store.getState())
+//console.log('after dispatching state is',store.getState())
 
